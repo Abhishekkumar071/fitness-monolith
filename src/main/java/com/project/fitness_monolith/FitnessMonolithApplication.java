@@ -9,10 +9,5 @@ public class FitnessMonolithApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FitnessMonolithApplication.class, args);
-
-		Activity activity = new Activity();
-
-		activity.getId()
 	}
-
 }
