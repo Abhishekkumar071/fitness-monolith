@@ -1,5 +1,4 @@
 package com.project.fitness_monolith.controller;
-
 import com.project.fitness_monolith.dto.RegisterRequest;
 import com.project.fitness_monolith.dto.UserResponse;
 import com.project.fitness_monolith.model.User;
