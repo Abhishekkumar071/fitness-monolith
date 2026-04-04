@@ -1,6 +1,5 @@
 package com.project.fitness_monolith.service;
 
-
 import com.project.fitness_monolith.dto.ActivityRequest;
 import com.project.fitness_monolith.dto.ActivityResponse;
 import com.project.fitness_monolith.model.Activity;
@@ -9,6 +8,9 @@ import com.project.fitness_monolith.repository.ActivityRepository;
 import com.project.fitness_monolith.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -47,5 +49,14 @@ public class ActivityService {
         response.setCreatedAt(savedActivity.getCreatedAt());
         response.setUpdatedAt(savedActivity.getUpdatedAt());
         return  response;
+    }
+
+    public List<ActivityResponse> getUserActivities(String userId) {
+        List<Activity> activityList = activityRepository.findByUserId(userId);
+//        1. Activity --> ActivityResponse
+//        2. Collect in list and return;
+        return activityList.stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
     }
 }
