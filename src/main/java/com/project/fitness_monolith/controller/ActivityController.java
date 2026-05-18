@@ -18,6 +18,7 @@ public class ActivityController {
 
     @PostMapping
     public  ResponseEntity<ActivityResponse>  trackActivity(@RequestBody ActivityRequest request){
+        System.out.println("Here You Post Request: "+request);
         return ResponseEntity.ok(activityService.trackActivity(request));
     }
 
@@ -25,6 +26,7 @@ public class ActivityController {
     public  ResponseEntity<List<ActivityResponse>>  getUserActivities(
             @RequestHeader(value = "X-User-ID") String userId
     ){
+        System.out.println("Here Your Get Request: "+userId);
         return ResponseEntity.ok(activityService.getUserActivities(userId));
     }
 }
