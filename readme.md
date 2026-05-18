@@ -1,9 +1,9 @@
 # 🏋️‍♂️ FitPulse-Backend
-
-[![Spring Boot](https://shields.io)](https://spring.io)
-[![Spring Security](https://shields.io)](https://spring.io)
-[![Docker](https://shields.io)](https://docker.com)
-[![MySQL](https://shields.io)](https://mysql.com)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)
+![MySQL](https://img.shields.io/badge/MySQL-316192?style=for-the-badge&logo=mysql&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
 A production-ready, secure, and containerized REST API backend for a comprehensive **Fitness Tracker Application**. Built using modern enterprise design patterns, this system handles user activity metrics, tracks progress, generates AI-powered recommendations, and enforces strict security protocols.
 
