@@ -1,5 +1,6 @@
 package com.project.fitness_monolith.service;
 
+import com.project.fitness_monolith.dto.LoginRequest;
 import com.project.fitness_monolith.dto.RegisterRequest;
 import com.project.fitness_monolith.dto.UserResponse;
 import com.project.fitness_monolith.model.User;
@@ -58,5 +59,15 @@ public class UserService {
         response.setUpdatedAt(savedUser.getUpdatedAt());
         return response;
     }
+    public User authenticate(LoginRequest loginRequest) {
+        User user = userRepository.findByEmail(loginRequest.getEmail());
+        if (user == null)
+            throw new RuntimeException("Invalid Credentials");
 
+        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Invalid Credentials");
+        }
+
+        return user;
+    }
 }

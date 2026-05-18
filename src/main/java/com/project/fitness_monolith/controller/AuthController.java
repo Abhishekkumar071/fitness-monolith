@@ -32,17 +32,16 @@ public class AuthController {
 
     //end point to generate token
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest){
-        System.out.println("Here your login request: "+loginRequest);
-        User user = userRepository.findByEmail(loginRequest.getEmail());
-        if(user==null) return ResponseEntity.status(401).build();
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
+        try {
+            User user = userService.authenticate(loginRequest);
+            String token = jwtUtils.generateToken(user.getId(), user.getRole().name());
+            return ResponseEntity.ok(new LoginResponse(
+                    token, userService.mapToResponse(user)
+            ));
 
-        if(!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())){
+        } catch (RuntimeException e) {
             return ResponseEntity.status(401).build();
         }
-
-        String token = jwtUtils.generateToken(user.getId(), user.getRole().name());
-
-        return ResponseEntity.ok(new LoginResponse(token, userService.mapToResponse(user)));
     }
 }
