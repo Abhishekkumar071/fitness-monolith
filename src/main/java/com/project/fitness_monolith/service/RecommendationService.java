@@ -19,12 +19,16 @@ public class RecommendationService {
     private final ActivityRepository activityRepository;
     private final RecommendationRepository recommendationRepository;
 
-    public Recommendation genrateRecommendation(RecommendationRequest request) {
-        User user = userRepository.findById(request.getUserId())
-                .orElseThrow(()->new RuntimeException("User Not Found: "+request.getUserId()));
+    public Recommendation genrateRecommendation(RecommendationRequest request, String userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(()->new IllegalArgumentException("User Not Found: "+userId));
 
         Activity activity = activityRepository.findById(request.getActivityId())
-                .orElseThrow(()->new RuntimeException("Activity Not Found: "+request.getActivityId()));
+                .orElseThrow(()->new IllegalArgumentException("Activity Not Found: "+request.getActivityId()));
+
+        if (!activity.getUser().getId().equals(userId)) {
+            throw new IllegalArgumentException("Activity does not belong to authenticated user");
+        }
 
         Recommendation recommendation = Recommendation.builder()
                 .user(user)

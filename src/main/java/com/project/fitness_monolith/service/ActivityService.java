@@ -19,9 +19,9 @@ public class ActivityService {
 
     private final UserRepository userRepository;
 
-    public ActivityResponse trackActivity(ActivityRequest request){
-        User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new RuntimeException("Invalid user: "+ request.getUserId()));
+    public ActivityResponse trackActivity(ActivityRequest request, String userId){
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user: "+ userId));
 
         Activity activity = Activity.builder()
                 .user(user)

@@ -7,6 +7,7 @@ import com.project.fitness_monolith.model.User;
 import com.project.fitness_monolith.model.UserRole;
 import com.project.fitness_monolith.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -42,9 +43,9 @@ public class UserService {
 //                List.of()
 //
 //        );
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already registered");
-        }
+        if (userRepository.existsByEmail(request.getEmail()))
+            throw new IllegalArgumentException("Email already registered");
+
         User savedUser = userRepository.save(user);
         return mapToResponse(savedUser);
     }
@@ -62,10 +63,10 @@ public class UserService {
     public User authenticate(LoginRequest loginRequest) {
         User user = userRepository.findByEmail(loginRequest.getEmail());
         if (user == null)
-            throw new RuntimeException("Invalid Credentials");
+            throw new BadCredentialsException("Invalid credentials");
 
         if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Invalid Credentials");
+            throw new BadCredentialsException("Invalid credentials");
         }
 
         return user;

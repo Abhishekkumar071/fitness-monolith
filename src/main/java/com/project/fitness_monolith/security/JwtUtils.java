@@ -5,8 +5,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -41,10 +39,10 @@ public class JwtUtils {
         try {
             Jwts.parser().verifyWith((SecretKey) key()).build()
                     .parseSignedClaims(jwtToken);
+            return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            return false;
         }
-        return true;
     }
 
     private Key key() {
