@@ -541,7 +541,7 @@ Built and maintained by **Abhishek Kumar**.
   </tr>
   <tr>
     <td><strong>GitHub</strong></td>
-    <td><a href="https://github.com/Abhishekkumar071">Add your GitHub profile link here</a></td>
+    <td><a href="https://github.com/Abhishekkumar071">profile link here</a></td>
   </tr>
 </table>
 
